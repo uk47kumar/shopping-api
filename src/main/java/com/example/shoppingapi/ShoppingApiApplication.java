@@ -1,0 +1,20 @@
+package com.example.shoppingapi;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class ShoppingApiApplication {
+
+	@Bean
+	public ModelMapper modelMapper(){
+		return new ModelMapper();
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(ShoppingApiApplication.class, args);
+	}
+
+}
