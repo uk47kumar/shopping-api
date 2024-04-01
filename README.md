@@ -9,7 +9,7 @@ For the sake of simplicity whenever the application starts by using data.sql fil
 
 Couple of things should you know !
 
-so, in this application couple things should you know like I am not using @Repository annotation because we know that Jpa internally user SimpleJpaRepository and SimpleJpaRepository already annotated by @Repository that why I am not using this annotation.
+so, in this application I am not using @Repository annotation because we know that Jpa internally user SimpleJpaRepository and SimpleJpaRepository already annotated by @Repository that why I am not using this annotation.
 
 Also I am not using @Autowired because Lombok provide a annotation called @RequiredArgsConstructor so whenever I use this annotation there are no need of creating constructor and applying constructor dependency injection.
 
