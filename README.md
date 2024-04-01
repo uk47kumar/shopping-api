@@ -17,3 +17,8 @@ Also I am not using @Autowired because Lombok provide a annotation called @Requi
 In this application most of the time I am using Lombok annotation like @Getter, @Setter, @NoArgsConstructor, @AllArgsConstructor and @RequiredArgsConstructor for reducing Boiler plate codes.
 
 Let's talk about Endpoints :
+1. (GET) http://localhost:8080/fetchCoupons -- for getting the list of all available coupons
+2. (POST) http://localhost:8080/{userId}/order?qty=10&coupon=OFF5 -- for placing order like this --> http://localhost:8080/1/order?qty=10&coupon=OFF5
+3. (POST) http://localhost:8080/{userId}/{orderId}/pay?amount=950 -- for payment the placed order like this --> http://localhost:8080/1/1/pay?amount=950
+4. (GET) http://localhost:8080/{userId}/orders -- for getting all the orders by a user like this --> http://localhost:8080/1/orders
+5. (GET) http://localhost:8080/{userId}/orders/{orderId} -- for getting a single order by a user like this --> http://localhost:8080/1/orders/1
