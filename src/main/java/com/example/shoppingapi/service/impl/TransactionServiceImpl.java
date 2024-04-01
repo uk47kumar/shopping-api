@@ -5,6 +5,7 @@ import com.example.shoppingapi.entity.Transaction;
 import com.example.shoppingapi.entity.User;
 import com.example.shoppingapi.exception.ResourceNotFoundException;
 import com.example.shoppingapi.exception.ShoppingApiException;
+import com.example.shoppingapi.payload.SingleItemApiResponse;
 import com.example.shoppingapi.payload.TransactionDto;
 import com.example.shoppingapi.repository.OrderRepository;
 import com.example.shoppingapi.repository.TransactionRepository;
@@ -15,6 +16,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import static com.example.shoppingapi.utils.OrderStatus.*;
+import static org.springframework.http.HttpStatus.*;
 
 @RequiredArgsConstructor
 @Service
@@ -26,7 +28,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final ModelMapper modelMapper;
 
     @Override
-    public TransactionDto createTransaction(Long userId, Long orderId, double amount) {
+    public SingleItemApiResponse<TransactionDto> createTransaction(Long userId, Long orderId, double amount) {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
@@ -50,7 +52,9 @@ public class TransactionServiceImpl implements TransactionService {
         order.setTransactionId(transactionId);
         orderRepository.save(order);
 
-        return mapToDto(transaction);
+        TransactionDto transactionDto = mapToDto(transaction);
+
+        return new SingleItemApiResponse<>(OK.value(), transactionDto);
     }
 
     private TransactionDto mapToDto(Transaction transaction) {

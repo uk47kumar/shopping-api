@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.springframework.http.HttpStatus.OK;
+
 @RequiredArgsConstructor
 @Service
 public class CouponServiceImpl implements CouponService {
@@ -29,7 +31,7 @@ public class CouponServiceImpl implements CouponService {
                 .map(coupon -> mapToDto(coupon))
                 .collect(Collectors.toList());
 
-        return new ListApiResponse<>(200, couponResponseDtoList);
+        return new ListApiResponse<>(OK.value(), couponResponseDtoList);
     }
 
     private CouponResponseDto mapToDto(Coupon coupon) {

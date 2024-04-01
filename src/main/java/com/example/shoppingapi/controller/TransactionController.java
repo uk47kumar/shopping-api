@@ -1,5 +1,6 @@
 package com.example.shoppingapi.controller;
 
+import com.example.shoppingapi.payload.SingleItemApiResponse;
 import com.example.shoppingapi.payload.TransactionDto;
 import com.example.shoppingapi.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +19,12 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping("/{userId}/{orderId}/pay")
-    public ResponseEntity<TransactionDto> createTransaction(
+    public ResponseEntity<SingleItemApiResponse<TransactionDto>> createTransaction(
             @PathVariable("userId") Long userId,
             @PathVariable("orderId") Long orderId,
             @RequestParam double amount) {
-        TransactionDto transactionDto = transactionService.createTransaction(userId, orderId, amount);
-        return new ResponseEntity<>(transactionDto, OK);
+        TransactionDto transactionDto = transactionService.createTransaction(userId, orderId, amount).getData();
+        SingleItemApiResponse<TransactionDto> apiResponse = new SingleItemApiResponse<>(OK.value(), transactionDto);
+        return new ResponseEntity<>(apiResponse, OK);
     }
 }
